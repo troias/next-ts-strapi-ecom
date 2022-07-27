@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 interface Products {
   data: {
@@ -41,9 +41,9 @@ type Props = {
 
 const Home: NextPage = (props: Props) => {
 
-  const cart = useSelector((state: any) => state.cart)
+  // const cart = useSelector((state: any) => state.cart)
 
-  console.log("cart", cart)
+  // console.log("cart", cart)
   console.log("PropsHomePage", props)
 
   const { products } = props
