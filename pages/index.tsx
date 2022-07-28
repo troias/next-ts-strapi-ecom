@@ -1,55 +1,34 @@
 import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-// import { useSelector } from 'react-redux'
-
-interface Products {
-  data: {
-    products: {
-      data: Product[]
-    }
-  }
-  meta: Meta
-}
-
-interface Meta {
-  pagination: {
-    pageCount: number
-    page: number
-    pageSize: number
-    total: number
-  }
-}
-
-interface Product {
-  attributes: {
-    createdAt: string
-    description: string
-    name: string
-    price_in_cents: number
-    published_at: string
-    updatedAt: string
-  }
-}
+import { useSelector, useDispatch } from 'react-redux'
+// import { getProducts } from '../redux/actions/productActions'
+import { Product, Products } from '../lib/types'
+import { productActions } from '../redux-store/productsSlice/productsSlice'
+import { useAppDispatch } from '../lib/hooks/hooks'
+import { fetchInitialProducts } from '../redux-store/productsSlice/productsSlice'
 
 type Props = {
   products?: Products
 }
 
 
-
 const Home: NextPage = (props: Props) => {
 
-  // const cart = useSelector((state: any) => state.cart)
+  const cart = useSelector((state: any) => state.cart)
+  const products = useSelector((state: any) => state.products)
+  const dispatch: any = useAppDispatch()
 
-  // console.log("cart", cart)
-  console.log("PropsHomePage", props)
+  console.log("products", products)
 
-  const { products } = props
-  const { data } = products || {}
-  // const { meta } = products || {}
-  console.log("props", data)
+  useEffect(() => {
+    if (products.status === 'idle') {
+      dispatch(fetchInitialProducts())
+    }
+
+  }, [products.status, dispatch])
 
   return (
     <div className={styles.container}>
@@ -60,20 +39,26 @@ const Home: NextPage = (props: Props) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h2 className={styles.title}>
           Main Page
-        </h1>
+        </h2>
         <div>
           <h2>Products</h2>
           <ul>
-
-            {data && data.products.data.map((product: Product) => (
-              <li key={product.attributes.name}>
-                <h3>{product.attributes.name}</h3>
-                <p>{product.attributes.description}</p>
-                <p>{product.attributes.price_in_cents}</p>
+            {/* 
+            {products.data.map((product: Product) => (
+              <li key={product.id}>
+                <div>
+                  <Image src={product.image} alt={product.name} width={200} height={200} />
+                </div>
+                <div>
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p>{product.price}</p>
+                  <button onClick={() => dispatch(productActions.addToCart(product))}>Add to cart</button>
+                </div>
               </li>
-            ))}
+            ))} */}
 
           </ul>
 
@@ -84,65 +69,7 @@ const Home: NextPage = (props: Props) => {
   )
 }
 
-export const getStaticProps = async () => {
 
-
-  const getProducts = await fetch('http://localhost:1337/graphql',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        query: `
-
-          query {
-            products {
-              data {
-                attributes {
-                  name
-                  price_in_cents
-                  description
-                  updatedAt
-                  createdAt
-                  publishedAt
-
-                }
-              }
-              meta {
-                pagination {
-                  pageCount
-                  page
-                  pageSize
-                  total
-                }
-              }
-            }
-          }
-        `
-      })
-
-    }
-  )
-
-  const products: Products = await getProducts.json()
-
-
-
-  return {
-    props: {
-      products
-    }
-  }
-
-
-
-
-
-
-
-}
 
 
 export default Home
