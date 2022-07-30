@@ -18,17 +18,26 @@ type Props = {
 const Home: NextPage = (props: Props) => {
 
   const cart = useSelector((state: any) => state.cart)
-  const products = useSelector((state: any) => state.products)
+  const productState = useSelector((state: any) => state.products)
+
   const dispatch: any = useAppDispatch()
 
-  console.log("products", products)
+
+
+  const { products } = productState
+  const { data } = products
+
+
+
+  console.log("products2", data && data.products.data)
+
 
   useEffect(() => {
-    if (products.status === 'idle') {
+    if (productState.status === 'idle') {
       dispatch(fetchInitialProducts())
     }
 
-  }, [products.status, dispatch])
+  }, [productState.status, dispatch])
 
   return (
     <div className={styles.container}>
@@ -45,20 +54,25 @@ const Home: NextPage = (props: Props) => {
         <div>
           <h2>Products</h2>
           <ul>
-            {/* 
-            {products.data.map((product: Product) => (
-              <li key={product.id}>
+            {data && data.products.data.map((product: Product) => (
+              <li key={Math.random()} >
                 <div>
-                  <Image src={product.image} alt={product.name} width={200} height={200} />
+
+                  {/* {console.log("productImage", product.attributes.thumbnail.data.attributes.url)} */}
+                  <Image src={`http://localhost:1337${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
+
                 </div>
                 <div>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                  <button onClick={() => dispatch(productActions.addToCart(product))}>Add to cart</button>
+                  <h3>{product.attributes.name}</h3>
+                  <p>{product.attributes.description}</p>
+                  <p>{product.attributes.price_in_cents}</p>
                 </div>
               </li>
-            ))} */}
+            ))}
+
+
+
+
 
           </ul>
 

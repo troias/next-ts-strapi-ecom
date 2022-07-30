@@ -12,6 +12,20 @@ export const getProducts: GetProducts = async () => {
       },
       body: JSON.stringify({
         query: `
+
+          fragment FileParts on UploadFileEntityResponse {
+            data {
+              id
+              attributes {
+                alternativeText
+                width
+                height
+                mime
+                url
+                formats
+              }
+            }
+          }
   
         query {
           products {
@@ -23,6 +37,10 @@ export const getProducts: GetProducts = async () => {
                 updatedAt
                 createdAt
                 publishedAt
+                thumbnail {
+                  ...FileParts
+                }
+               
   
               }
             }

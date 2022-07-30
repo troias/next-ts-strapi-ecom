@@ -23,6 +23,14 @@ export interface Product {
     createdAt: string
     description: string
     name: string
+    thumbnail: {
+      data: {
+        id: number
+        attributes: {
+          url: string
+        }
+      }
+    }
     price_in_cents: number
     published_at: string
     updatedAt: string
