@@ -2,15 +2,18 @@ import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+
 import { useSelector, useDispatch } from 'react-redux'
-// import { getProducts } from '../redux/actions/productActions'
+
 import { Product, Products } from '../lib/types'
-import { productActions } from '../redux-store/productsSlice/productsSlice'
+
 import { useAppDispatch } from '../lib/hooks/hooks'
 import { fetchInitialProducts } from '../redux-store/productsSlice/productsSlice'
 
-type Props = {
+
+import styles from '../styles/Home.module.css'
+
+interface Props {
   products?: Products
 }
 
@@ -49,7 +52,7 @@ const Home: NextPage = (props: Props) => {
 
       <main className={styles.main}>
         <h2 className={styles.title}>
-          Main Page
+          store
         </h2>
         <div>
           <h2>Products</h2>
@@ -60,7 +63,6 @@ const Home: NextPage = (props: Props) => {
 
                   {/* {console.log("productImage", product.attributes.thumbnail.data.attributes.url)} */}
                   <Image src={`http://localhost:1337${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
-
                 </div>
                 <div>
                   <h3>{product.attributes.name}</h3>
