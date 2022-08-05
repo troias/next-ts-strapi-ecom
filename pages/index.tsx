@@ -27,12 +27,16 @@ const Home: NextPage = (props: Props) => {
 
 
 
-  const { products } = productState
-  const { data } = products
+  const { data } = productState.products
+
+
+  console.log("products2", productState.products)
 
 
 
-  console.log("products2", data && data.products.data)
+
+
+
 
 
   useEffect(() => {
@@ -54,31 +58,37 @@ const Home: NextPage = (props: Props) => {
         <h2 className={styles.title}>
           store
         </h2>
-        <div>
+
+
+
+        <div className="">
           <h2>Products</h2>
-          <ul>
-            {data && data.products.data.map((product: Product) => (
-              <li key={Math.random()} >
-                <div>
 
-                  {/* {console.log("productImage", product.attributes.thumbnail.data.attributes.url)} */}
-                  <Image src={`http://localhost:1337${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
-                </div>
-                <div>
-                  <h3>{product.attributes.name}</h3>
-                  <p>{product.attributes.description}</p>
-                  <p>{product.attributes.price_in_cents}</p>
-                </div>
-              </li>
-            ))}
+          <div className={styles.product_wrapper} >
 
+            <ul className={styles.product_grid} >
+              {data && data.products.data.map((product: Product) => (
+                <li key={Math.random()} className={styles.product_list_item} >
+                  <div>
 
+                    {/* {console.log("productImage", product.attributes.thumbnail.data.attributes.url)} */}
+                    <div className={styles.product_image}>
+                      <Image src={`http://localhost:1337${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
+                    </div>
+                  </div>
+                  <div>
+                    <h3>{product.attributes.name}</h3>
+                    <p>{product.attributes.description}</p>
+                    <p>{product.attributes.price_in_cents}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-
-
-          </ul>
-
+          </div>
         </div>
+
+
       </main>
 
     </div>
