@@ -19,10 +19,12 @@ export interface Meta {
 }
 
 export interface Product {
+  id: string
   attributes: {
     createdAt: string
     description: string
     name: string
+
     thumbnail: {
       data: {
         id: number
@@ -34,5 +36,6 @@ export interface Product {
     price_in_cents: number
     published_at: string
     updatedAt: string
+    slug: string
   }
 }
