@@ -2,28 +2,45 @@ import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React from 'react'
 import { getSingleProduct, getProducts } from '../../lib/strapiApi'
 import { useSelector } from 'react-redux'
-import { Product } from '../../lib/types'
+import { Product, Products } from '../../lib/types'
+import { toLocalStingMoney } from '../../utils/format'
 
-type Props = {}
+type Props = {
+    product: Products
+}
 
 type Params = {
     slug: string
 }
 
 
+
 const ProductDetailsPage = (props: Props) => {
-    const { slug } = props as Params
-    console.log("product detail props", props)
+
+
+
+    const { data } = props.product
+    const { products } = data
+    const { ...spread } = products.data
+    const { ...spreadProducts } = spread[0]
+    // I spread the arr into a new object and then I spread the object into a new object
+
+    console.log("spread2", spreadProducts)
+
+
+
+
 
 
 
     return (
         <div>
-            <h1>Product Details</h1>
+            <h1>{spreadProducts.attributes.name}</h1>
+            <p>{spreadProducts.attributes.description}</p>
+            <p>{toLocalStingMoney(spreadProducts.attributes.price_in_cents)}</p>
 
-            <p>
-                This is the product details page.
-            </p>
+
+
 
 
 
