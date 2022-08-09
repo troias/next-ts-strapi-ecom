@@ -12,7 +12,7 @@ type State = {
   status: Status
 }
 
-type Status = "idle" | "pending" | "fulfilled" | "rejected"
+export type Status = "idle" | "pending" | "fulfilled" | "rejected"
 
 type Action = {
   type: string

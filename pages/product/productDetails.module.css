@@ -1,0 +1,28 @@
+.container {
+    padding: 0 2rem;
+    margin: 10px 10% 2em 15%
+}
+.classes.product_details_container {
+  padding: 0;
+  width : 50%;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.product_details_title {
+    display: flex;
+    justify-content: center;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.product_details_description {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}

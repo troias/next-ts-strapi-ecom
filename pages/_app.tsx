@@ -1,10 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { wrapper } from '../redux-store/indexSlice'
+import NavBar from '../components/navigation/navbar'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+
+  return (
+    <>
+      <NavBar />
+      <Component {...pageProps} />
+
+    </>
+  )
+
 
 }
 

@@ -26,32 +26,17 @@ interface Props {
 
 const Home: NextPage = (props: Props) => {
 
-
-
-
-
   // const cart = useSelector((state: any) => state.cart)
+
   const productState = useSelector((state: any) => state.products)
-
-
 
   const dispatch: any = useAppDispatch()
 
-
-
   const { data } = productState.products
 
+  console.log("productState", productState)
+
   console.log("Home props", data)
-
-
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     if (productState.status === 'idle') {
@@ -67,7 +52,7 @@ const Home: NextPage = (props: Props) => {
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+
       <main className={styles.main}>
 
 
@@ -75,14 +60,11 @@ const Home: NextPage = (props: Props) => {
 
         <div className={styles.products_container}>
           <h2>Products</h2>
-
           <div className={styles.product_wrapper} >
-
             <ul className={styles.product_grid} >
               {data && data.products.data.map((product: Product) => (
                 <li key={Math.random()} className={styles.product_list_item} >
                   <div>
-
                     {/* {console.log("productImage", product.attributes.thumbnail.data.attributes.url)} */}
                     <div className={styles.product_image}>
                       <Image src={`http://localhost:1337${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
@@ -96,7 +78,6 @@ const Home: NextPage = (props: Props) => {
 
 
                     <p>{toLocalStingMoney(product.attributes.price_in_cents)}</p>
-
                     {/* <button className={styles.add_to_cart} onClick={() => { dispatch(addToCart(product)) }}>Add to cart</button> */}
                     <button className={styles.add_to_cart} >
 

@@ -1,5 +1,6 @@
 import React from "react"
 import classes from "./navbar.module.scss"
+import Cart from "../cart/cart"
 
 type Props = {}
 
@@ -33,39 +34,11 @@ const Navbar = (props: Props) => {
               Products
             </a>
           </li>
-          {/* <li className={classes.nav_item} >
-            <a
-              className={classes.nav_link}
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a> */}
-          {/* <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
-            </div> */}
-          {/* </li> */}
-          {/* <li className="nav-item">
-            <a className="classes.nav_link disabled" href="#">
-              Disabled
-            </a>
-          </li> */}
-          <form className="form-inline my-2 my-lg-0">
+
+
+          <form className={classes.nav_search_form}>
             <input
-              className="form-control mr-sm-2"
+              className=""
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -77,6 +50,11 @@ const Navbar = (props: Props) => {
               Search
             </button>
           </form>
+
+          <li className={classes.nav_item}>
+            <Cart />
+          </li>
+
         </ul>
 
       </div>

@@ -18,6 +18,17 @@ export interface Meta {
   }
 }
 
+interface ImageFormat {
+  url: string
+  width: number
+  height: number
+  ext: string
+  hash: string
+  name: string
+  size: number
+  path: string
+}
+
 export interface Product {
   id: string
   attributes: {
@@ -30,6 +41,17 @@ export interface Product {
         id: number
         attributes: {
           url: string
+          width: number
+          height: number
+          alternativeText: string
+          mime: string
+          formats: {
+            thumbnail: ImageFormat
+            small: ImageFormat
+            medium: ImageFormat
+            large: ImageFormat
+            original: ImageFormat
+          }
         }
       }
     }
