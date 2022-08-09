@@ -62,16 +62,21 @@ const ProductDetailsPage = (props: Props) => {
         const { product, quantity } = productObj
         const { id, attributes } = product
         const { name, price_in_cents, description, thumbnail } = attributes
+
+
+
         const cartItem: CartItem = {
             id,
             name,
             price: price_in_cents,
             description,
-            quantity,
-            image: thumbnail.data.
+            quantity: quantity,
+            image: thumbnail.data.attributes.url,
+            slug: name
         }
-        dispatch(cartActions.addToCart(cartItem))
-        console.log("cartItem", cartItem)
+        if (quantity > 0 && cartItem) {
+            dispatch(cartActions.addToCart(cartItem))
+        }
 
     }
     const dispatch = useDispatch()
@@ -95,6 +100,7 @@ const ProductDetailsPage = (props: Props) => {
                 </div>
                 <div className={classes.product_quantity}>
                     <p>Quantity</p>
+
                 </div>
                 <div className={classes.addtoCart}>
                     <button onClick={() => addProductToCartHandler({ product: spreadProduct, quantity: quantity })}>Add to cart</button>

@@ -27,17 +27,28 @@ interface CartAction {
 }
 
 export interface CartItem {
+  id: string | number
   name: string
   price: number
   quantity: number
-  id: string
   description: string
-  image: {
-    data: {}
-  }
+  image: string
+  slug: string
 }
 
 type CartItems = Set<CartItem[]>
+
+const validateCartItem = (cartItem: CartItem): CartItem => {
+  if (!cartItem.id) throw new Error("Cart item must have an id")
+  if (!cartItem.name) throw new Error("Cart item must have a name")
+  if (!cartItem.price) throw new Error("Cart item must have a price")
+  if (!cartItem.quantity) throw new Error("Cart item must have a quantity")
+  if (!cartItem.description)
+    throw new Error("Cart item must have a description")
+  if (!cartItem.image) throw new Error("Cart item must have an image")
+  if (!cartItem.slug) throw new Error("Cart item must have a slug")
+  return cartItem
+}
 
 const cartSlice = createSlice({
   name: "cart",
@@ -50,8 +61,31 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state: CartState, action: CartAction) => {
-      state.cart.push(action.payload)
+      const { payload } = action
+      const { cart } = state
+      const { id, name, price, quantity, description, image, slug } = payload
+
+      if (
+        validateCartItem({
+          id,
+          name,
+          price,
+          quantity,
+          description,
+          image,
+          slug,
+        })
+      ) {
+        const cartItem = { id, name, price, quantity, description, image, slug }
+        if (cart.find((item) => item.id === cartItem.id)) {
+          const index = cart.findIndex((item) => item.id === cartItem.id)
+          cart[index].quantity += cartItem.quantity
+        } else {
+          cart.push(cartItem)
+        }
+      }
     },
+
     removeFromCart: (state: CartState, action: CartAction) => {
       state.cart = state.cart.filter(
         (item: CartItem) => item.id !== action.payload

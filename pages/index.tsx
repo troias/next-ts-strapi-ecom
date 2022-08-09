@@ -49,7 +49,10 @@ const Home: NextPage = (props: Props) => {
   }, [productState.status, dispatch])
 
   const addTocartHandler = (productObj: CartItem) => {
-    dispatch(cartActions.addToCart(productObj))
+    if (productObj.quantity > 0) {
+      dispatch(cartActions.addToCart(productObj))
+    }
+
     console.log("cartItem")
   }
 
@@ -93,7 +96,8 @@ const Home: NextPage = (props: Props) => {
                         price: product.attributes.price_in_cents,
                         description: product.attributes.description,
                         quantity: 1,
-                        image: `${process.env.NEXT_PUBLIC_STRAPI_URL}${product.attributes.thumbnail.data.attributes.url}`
+                        image: `${process.env.NEXT_PUBLIC_STRAPI_URL}${product.attributes.thumbnail.data.attributes.url}`,
+                        slug: product.attributes.slug
                       })
                     }}>Add to cart</button>
 
