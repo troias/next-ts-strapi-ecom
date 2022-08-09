@@ -15,6 +15,7 @@ import styles from '../styles/Home.module.css'
 import { toLocalStingMoney } from '../utils/format'
 import Navbar from '../components/navigation/navbar'
 import { getProducts } from '../lib/strapiApi'
+import { CartItem, cartActions } from '../redux-store/cartSlice/cartSlice'
 
 
 
@@ -30,11 +31,13 @@ const Home: NextPage = (props: Props) => {
 
   const productState = useSelector((state: any) => state.products)
 
+  // const productArr = useSelector((state: any) => state.products.products.data.products.data)
+
   const dispatch: any = useAppDispatch()
 
   const { data } = productState.products
 
-  console.log("productState", productState)
+  // console.log("productState", productArr)
 
   console.log("Home props", data)
 
@@ -44,6 +47,11 @@ const Home: NextPage = (props: Props) => {
     }
 
   }, [productState.status, dispatch])
+
+  const addTocartHandler = (productObj: CartItem) => {
+    dispatch(cartActions.addToCart(productObj))
+    console.log("cartItem")
+  }
 
   return (
     <div className={styles.container}>
@@ -67,7 +75,7 @@ const Home: NextPage = (props: Props) => {
                   <div>
                     {/* {console.log("productImage", product.attributes.thumbnail.data.attributes.url)} */}
                     <div className={styles.product_image}>
-                      <Image src={`http://localhost:1337${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
+                      <Image src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${product.attributes.thumbnail.data.attributes.url}`} alt={product.attributes.name} width={200} height={200} />
                     </div>
                   </div>
                   <div>
@@ -78,7 +86,17 @@ const Home: NextPage = (props: Props) => {
 
 
                     <p>{toLocalStingMoney(product.attributes.price_in_cents)}</p>
-                    {/* <button className={styles.add_to_cart} onClick={() => { dispatch(addToCart(product)) }}>Add to cart</button> */}
+                    <button className={styles.add_to_cart} onClick={() => {
+                      addTocartHandler({
+                        id: product.id,
+                        name: product.attributes.name,
+                        price: product.attributes.price_in_cents,
+                        description: product.attributes.description,
+                        quantity: 1,
+                        image: `${process.env.NEXT_PUBLIC_STRAPI_URL}${product.attributes.thumbnail.data.attributes.url}`
+                      })
+                    }}>Add to cart</button>
+
                     <button className={styles.add_to_cart} >
 
                       <>

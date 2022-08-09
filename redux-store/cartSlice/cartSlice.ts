@@ -5,11 +5,20 @@ import { SpreadProduct } from "../../pages/product/[slug]"
 
 type CartObj = CartItem[]
 
-interface CartState {
+export interface CartState {
   cart: CartObj
+
   // cartItems: CartItems
   isLoading: boolean
   error: unknown
+}
+
+export interface CartStateRedux {
+  cart: {
+    cart: CartObj
+    isLoading: boolean
+    error: unknown
+  }
 }
 
 interface CartAction {
@@ -17,8 +26,15 @@ interface CartAction {
   payload: any
 }
 
-export interface CartItem extends SpreadProduct {
+export interface CartItem {
+  name: string
+  price: number
   quantity: number
+  id: string
+  description: string
+  image: {
+    data: {}
+  }
 }
 
 type CartItems = Set<CartItem[]>

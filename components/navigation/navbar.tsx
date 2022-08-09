@@ -1,6 +1,7 @@
 import React from "react"
 import classes from "./navbar.module.scss"
 import Cart from "../cart/cart"
+import Link from "next/link"
 
 type Props = {}
 
@@ -25,9 +26,13 @@ const Navbar = (props: Props) => {
       <div className={classes.navbar_collapse} id="navbarSupportedContent">
         <ul className={classes.navbar_nav}>
           <li className={classes.nav_item}>
-            <a className={classes.nav_link} href="#">
-              Home <span className="sr-only">(current)</span>
-            </a>
+
+            <Link href="/" className={classes.nav_link}>
+
+              <span className={classes.nav_link} >  Home</span>
+
+            </Link>
+
           </li>
           <li className={classes.nav_item}>
             <a className={classes.nav_link} href="#">
@@ -51,9 +56,11 @@ const Navbar = (props: Props) => {
             </button>
           </form>
 
-          <li className={classes.nav_item}>
-            <Cart />
-          </li>
+          <Link href="/cart" className={classes.nav_link}>
+            <li className={classes.nav_item}>
+              <Cart />
+            </li>
+          </Link>
 
         </ul>
 

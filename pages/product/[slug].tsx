@@ -29,6 +29,11 @@ export interface SpreadProduct {
         updatedAt: string
         createdAt: string
         publishedAt: string
+        thumbnail: {
+            data: {
+
+            }
+        }
     }
 }
 
@@ -56,13 +61,14 @@ const ProductDetailsPage = (props: Props) => {
 
         const { product, quantity } = productObj
         const { id, attributes } = product
-        const { name, price_in_cents, description } = attributes
+        const { name, price_in_cents, description, thumbnail } = attributes
         const cartItem: CartItem = {
             id,
             name,
             price: price_in_cents,
             description,
-            quantity
+            quantity,
+            image: thumbnail.data.
         }
         dispatch(cartActions.addToCart(cartItem))
         console.log("cartItem", cartItem)
