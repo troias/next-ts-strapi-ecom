@@ -27,17 +27,17 @@ interface Props {
 
 const Home: NextPage = (props: Props) => {
 
-  // const cart = useSelector((state: any) => state.cart)
+
 
   const productState = useSelector((state: any) => state.products)
 
-  // const productArr = useSelector((state: any) => state.products.products.data.products.data)
+
 
   const dispatch: any = useAppDispatch()
 
   const { data } = productState.products
 
-  // console.log("productState", productArr)
+
 
   console.log("Home props", data)
 
@@ -94,8 +94,8 @@ const Home: NextPage = (props: Props) => {
                         id: product.id,
                         name: product.attributes.name,
                         price: product.attributes.price_in_cents,
-                        description: product.attributes.description,
                         quantity: 1,
+                        description: product.attributes.description,
                         image: `${process.env.NEXT_PUBLIC_STRAPI_URL}${product.attributes.thumbnail.data.attributes.url}`,
                         slug: product.attributes.slug
                       })

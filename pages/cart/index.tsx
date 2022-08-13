@@ -3,9 +3,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import classes from "./cart.module.scss"
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { GrActions, GrAdd } from 'react-icons/gr'
+import { cartActions } from '../../redux-store/cartSlice/cartSlice'
+import { FaMinus } from 'react-icons/fa'
+import { useRouter } from 'next/router'
 
 type Props = {}
+
+interface QuantityHandler {
+    (id: string, type: 'increase' | 'decrease'): void
+}
+
+
 
 
 
@@ -13,8 +22,37 @@ type Props = {}
 
 const Cart_page = (props: Props) => {
     const dispatch = useDispatch()
+    const router = useRouter()
     const quantity = useSelector((state: any) => state.cart.cart.length)
     const cart = useSelector((state: any) => state.cart.cart)
+    const total = useSelector((state: any) => state.cart.total)
+
+
+
+
+    const quantityHandler = (id: string, type: string) => {
+        console.log("quantityHandler", typeof id, type)
+        switch (type) {
+            case 'increase':
+                dispatch(cartActions.increaseQuantity({
+                    id: id,
+                }))
+                console.log("increase", id, type)
+                break
+            case 'decrease':
+                dispatch(cartActions.decreaseQuantity({
+                    id: id,
+                }))
+                break
+            default:
+                break
+        }
+
+
+
+
+    }
+
     return (
         <div className={classes.outer_container}>
             <div className={classes.header}>
@@ -36,7 +74,33 @@ const Cart_page = (props: Props) => {
                                         <div className={classes.cart_item_info}>
                                             <h3>{item.name}</h3>
                                             <p>{item.price}</p>
-                                            <p>{item.quantity}</p>
+                                            <></>
+                                            <p>
+                                                {item.quantity}
+                                                <span className={classes.addQuantityButton} onClick={() => quantityHandler(item.id, "increase")}>
+                                                    <GrAdd />
+                                                </span>
+                                                <span className={classes.removeQuantityButton} onClick={() => {
+
+
+                                                    if (item.quantity) {
+                                                        quantityHandler(item.id, "decrease")
+                                                    }
+                                                    if (item.quantity <= 1) {
+                                                        dispatch(cartActions.removeFromCart({
+                                                            id: item.id,
+                                                        }))
+                                                    }
+
+
+
+
+                                                }} >
+                                                    <FaMinus />
+                                                </span>
+
+                                            </p>
+
                                         </div>
                                     </div>
                                 </>
@@ -48,19 +112,20 @@ const Cart_page = (props: Props) => {
                     <h2>Order Summary</h2>
                     <div className={classes.order_summary_items}>
                         <div className={classes.order_summary_item}>
-                            <p>{quantity && quantity} items in cart</p>
+                            <p>{quantity && quantity} unique items in cart</p>
+                            <p>Total items in cart {cart && cart.reduce((acc: any, item: any) => acc + item.quantity, 0)}</p>
                             <p>Subtotal</p>
                             <p>{cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0)}</p>
                             <p className={classes.order_summary_item_tax}>Tax</p>
-                            <p className={classes.order_summary_item_tax}>{cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0) * 0.1}</p>
+                            <p className={classes.order_summary_item_tax}>{cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0) * 0.15} NZD </p>
                             <p className={classes.order_summary_item_total}>Total</p>
-                            <p className={classes.order_summary_item_total}>{cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0) * 1.1}</p>
+                            <p className={classes.order_summary_item_total}>{cart && total}</p>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

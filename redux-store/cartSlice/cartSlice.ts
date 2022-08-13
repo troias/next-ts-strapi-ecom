@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { Product, Products } from "../../lib/types"
 import { Status } from "../productsSlice/productsSlice"
 import { SpreadProduct } from "../../pages/product/[slug]"
+import { useEffect } from "react"
 
 type CartObj = CartItem[]
 
@@ -11,6 +12,7 @@ export interface CartState {
   // cartItems: CartItems
   isLoading: boolean
   error: unknown
+  total: number
 }
 
 export interface CartStateRedux {
@@ -88,7 +90,7 @@ const cartSlice = createSlice({
 
     removeFromCart: (state: CartState, action: CartAction) => {
       state.cart = state.cart.filter(
-        (item: CartItem) => item.id !== action.payload
+        (item: CartItem) => item.id !== action.payload.id
       )
     },
     updateCart: (state: CartState, action: CartAction) => {
@@ -108,6 +110,34 @@ const cartSlice = createSlice({
           }
         })
       }
+    },
+    increaseQuantity: (state: CartState, action: CartAction) => {
+      const { id } = action.payload
+      state.cart = state.cart.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity + 1 }
+        } else {
+          return item
+        }
+      })
+    },
+    decreaseQuantity: (state: CartState, action: CartAction) => {
+      const { id } = action.payload
+
+      state.cart.find((item) =>
+        item.id === id
+          ? item.quantity < 1
+            ? cartActions.updateCartItem({ id: item.id })
+            : item.quantity--
+          : item
+      )
+    },
+    calculateTotal: (state: CartState, action: CartAction) => {
+      const { cart } = action.payload
+      const total = cart.reduce((acc: number, item: CartItem) => {
+        return acc + item.price * item.quantity
+      }, 0)
+      state.total = total
     },
   },
 })
