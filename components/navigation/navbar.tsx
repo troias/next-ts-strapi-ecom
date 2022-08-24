@@ -56,11 +56,11 @@ const Navbar = (props: Props) => {
             </button>
           </form>
 
-          <Link href="/cart" className={classes.nav_link}>
-            <li className={classes.nav_item}>
-              <Cart />
-            </li>
-          </Link>
+
+          <li className={classes.nav_item}>
+            <Cart />
+          </li>
+
 
         </ul>
 

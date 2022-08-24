@@ -39,7 +39,7 @@ const Home: NextPage = (props: Props) => {
 
 
 
-  console.log("Home props", data)
+  console.log("Home props", data && data)
 
   useEffect(() => {
     if (productState.status === 'idle') {

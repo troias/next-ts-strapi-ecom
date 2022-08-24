@@ -135,7 +135,7 @@ const cartSlice = createSlice({
     calculateTotal: (state: CartState, action: CartAction) => {
       const { cart } = action.payload
       const total = cart.reduce((acc: number, item: CartItem) => {
-        return acc + item.price * item.quantity
+        return acc + item.price * item.quantity * 1.15
       }, 0)
       state.total = total
     },
