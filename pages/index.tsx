@@ -39,7 +39,7 @@ const Home: NextPage = (props: Props) => {
 
 
 
-  console.log("Home props", data && data)
+  // console.log("Home props", data && data)
 
   useEffect(() => {
     if (productState.status === 'idle') {
@@ -53,7 +53,7 @@ const Home: NextPage = (props: Props) => {
       dispatch(cartActions.addToCart(productObj))
     }
 
-    console.log("cartItem")
+    // console.log("cartItem")
   }
 
   return (
@@ -104,7 +104,7 @@ const Home: NextPage = (props: Props) => {
                     <button className={styles.add_to_cart} >
 
                       <>
-                        {console.log("cartid", product.id)}
+                        {/* {console.log("cartid", product.id)} */}
                         <a href={`/product/${product.attributes.slug}`}>product details page link</a>
                       </>
 

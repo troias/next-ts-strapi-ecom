@@ -18,7 +18,7 @@ const Cart = (props: Props) => {
 
     let [modelState, setModelState] = useState(false)
 
-    console.log("modelState", modelState)
+    // console.log("modelState", modelState)
 
     const cartModelHandler = () => {
         setModelState((prevState) => prevState = !modelState)
@@ -34,7 +34,7 @@ const Cart = (props: Props) => {
                 cart    <span className={classes.quantity} > {quantity} </span>
             </div>
             {modelState ? <Modal>
-                <CartModal />
+                <CartModal showModal={cartModelHandler} />
 
             </Modal> : null}
 
