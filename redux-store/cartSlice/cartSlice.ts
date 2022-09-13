@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { Product, Products } from "../../lib/types"
 import { Status } from "../productsSlice/productsSlice"
-import { SpreadProduct } from "../../pages/product/[slug]"
+import { SpreadProduct } from "../../pages/products/product/[slug]"
 import { useEffect } from "react"
 
 type CartObj = CartItem[]

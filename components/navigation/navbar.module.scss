@@ -71,9 +71,11 @@
     padding: 10px 10px 10px 15px;
     text-transform: uppercase;
     cursor: pointer;
+    ;
 
     &:hover {
         color: #000;
+
     }
 }
 
@@ -83,5 +85,6 @@
 
 .nav_search_form {
     margin-right: 2em;
+    margin-left: 2em;
 }
 

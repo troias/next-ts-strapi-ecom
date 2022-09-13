@@ -35,9 +35,9 @@ const Navbar = (props: Props) => {
 
           </li>
           <li className={classes.nav_item}>
-            <a className={classes.nav_link} href="#">
+            <Link href="/products" className={classes.nav_link}>
               Products
-            </a>
+            </Link>
           </li>
 
 

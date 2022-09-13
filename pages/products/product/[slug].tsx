@@ -1,12 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React, { useState } from 'react'
-import { getSingleProduct, getProducts } from '../../lib/strapiApi'
+import { getSingleProduct, getProducts } from '../../../lib/strapiApi'
 import { useSelector, useDispatch } from 'react-redux'
-import { Product, Products } from '../../lib/types'
-import { toLocalStingMoney } from '../../utils/format'
+import { Product, Products } from '../../../lib/types'
+import { toLocalStingMoney } from '../../../utils/format'
 import classes from './productDetails.module.css'
 import Image from 'next/image'
-import { CartItem, cartActions } from '../../redux-store/cartSlice/cartSlice'
+import { CartItem, cartActions } from '../../../redux-store/cartSlice/cartSlice'
 
 
 // import { addToCart } from '../../redux/actions/cartActions'
