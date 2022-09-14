@@ -81,9 +81,12 @@ const cartSlice = createSlice({
         const cartItem = { id, name, price, quantity, description, image, slug }
         if (cart.find((item) => item.id === cartItem.id)) {
           const index = cart.findIndex((item) => item.id === cartItem.id)
-          cart[index].quantity += cartItem.quantity
+          cart[index].quantity +=
+            cartItem.quantity &&
+            localStorage.setItem("cart", JSON.stringify(cart))
         } else {
-          cart.push(cartItem)
+          cart.push(cartItem) &&
+            localStorage.setItem("cart", JSON.stringify(cart))
         }
       }
     },

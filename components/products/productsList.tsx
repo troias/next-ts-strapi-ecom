@@ -51,11 +51,8 @@ const ProductsList = (props: Props) => {
                                 </div>
                             </div>
                             <div>
-
-
                                 <h3>{product.attributes.name}</h3>
                                 <p>{product.attributes.description}</p>
-
                                 <p>{toLocalStingMoney(product.attributes.price_in_cents)}</p>
                                 <button className={styles.add_to_cart} onClick={() => {
                                     addTocartHandler({
@@ -68,14 +65,11 @@ const ProductsList = (props: Props) => {
                                         slug: product.attributes.slug
                                     })
                                 }}>Add to cart</button>
-
                                 <button className={styles.add_to_cart} >
-
                                     <>
                                         {/* {console.log("cartid", product.id)} */}
-                                        <a href={`products/product/${product.attributes.slug}`}>product details page link</a>
+                                        <Link href={`products/product/${product.attributes.slug}`}>product details page link</Link>
                                     </>
-
                                 </button>
 
 

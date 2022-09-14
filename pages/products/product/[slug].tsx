@@ -49,6 +49,8 @@ interface ProductCartObj {
 
 const ProductDetailsPage = (props: Props) => {
 
+    const dispatch = useDispatch()
+
     const [quantity, setQuantity] = useState(0)
 
     const { data } = props.product
@@ -60,6 +62,7 @@ const ProductDetailsPage = (props: Props) => {
     const addProductToCartHandler = (productObj: ProductCartObj) => {
 
         const { product, quantity } = productObj
+        console.log("productObj", product, quantity)
         const { id, attributes } = product
         const { name, price_in_cents, description, thumbnail } = attributes
 
@@ -74,12 +77,14 @@ const ProductDetailsPage = (props: Props) => {
             image: thumbnail.data.attributes.url,
             slug: name
         }
-        if (quantity > 0 && cartItem) {
+
+        if (cartItem) {
             dispatch(cartActions.addToCart(cartItem))
         }
 
     }
-    const dispatch = useDispatch()
+
+
 
 
 
@@ -103,7 +108,7 @@ const ProductDetailsPage = (props: Props) => {
 
                 </div>
                 <div className={classes.addtoCart}>
-                    <button onClick={() => addProductToCartHandler({ product: spreadProduct, quantity: quantity })}>Add to cart</button>
+                    <button onClick={() => addProductToCartHandler({ product: spreadProduct, quantity: 1 })}>Add to cart</button>
 
                 </div>
             </div>
