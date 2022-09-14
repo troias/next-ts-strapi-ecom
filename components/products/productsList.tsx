@@ -11,22 +11,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 interface Props {
-    products: Product[]
+
 }
-
-
-
 
 const ProductsList = (props: Props) => {
 
     const productState = useSelector((state: any) => state.products)
     const dispatch = useDispatch()
-
     const addTocartHandler = (productObj: CartItem) => {
         if (productObj.quantity > 0) {
             dispatch(cartActions.addToCart(productObj))
         }
-
         // console.log("cartItem")
     }
 
@@ -37,12 +32,7 @@ const ProductsList = (props: Props) => {
     }, [productState.status, dispatch])
 
 
-
-
-
-
     // const products = useSelector(state => state.products.products)
-
 
     const { data } = productState.products
 
@@ -66,7 +56,6 @@ const ProductsList = (props: Props) => {
                                 <h3>{product.attributes.name}</h3>
                                 <p>{product.attributes.description}</p>
 
-
                                 <p>{toLocalStingMoney(product.attributes.price_in_cents)}</p>
                                 <button className={styles.add_to_cart} onClick={() => {
                                     addTocartHandler({
@@ -84,7 +73,7 @@ const ProductsList = (props: Props) => {
 
                                     <>
                                         {/* {console.log("cartid", product.id)} */}
-                                        <a href={`/product/${product.attributes.slug}`}>product details page link</a>
+                                        <a href={`products/product/${product.attributes.slug}`}>product details page link</a>
                                     </>
 
                                 </button>
