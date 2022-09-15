@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import classes from './cartModal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
@@ -18,11 +18,13 @@ const CartModal = (props: Props) => {
     const cart = useSelector((state: any) => state.cart.cart)
     const dispatch = useDispatch()
 
-    console.log("cart", props)
+    console.log("cartcart", cart)
 
     const cartModelHandler = () => {
         props.showModal()
     }
+
+
 
     return (
         <div className={classes.cartModal_container}>

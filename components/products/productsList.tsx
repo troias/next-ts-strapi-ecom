@@ -19,7 +19,8 @@ const ProductsList = (props: Props) => {
     const productState = useSelector((state: any) => state.products)
     const dispatch = useDispatch()
     const addTocartHandler = (productObj: CartItem) => {
-        if (productObj.quantity > 0) {
+        console.log("addTocartHandler", productObj)
+        if (productObj) {
             dispatch(cartActions.addToCart(productObj))
         }
         // console.log("cartItem")

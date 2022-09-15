@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartActions, CartStateRedux } from '../../redux-store/cartSlice/cartSlice'
 import classes from './cart.module.scss'
@@ -26,6 +26,8 @@ const Cart = (props: Props) => {
 
 
     }
+
+
 
     return (
 

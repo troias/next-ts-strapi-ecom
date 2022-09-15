@@ -15,7 +15,7 @@ import styles from '../styles/Home.module.css'
 import { toLocalStingMoney } from '../utils/format'
 import Navbar from '../components/navigation/navbar'
 import { getProducts } from '../lib/strapiApi'
-
+import { cartActions } from '../redux-store/cartSlice/cartSlice'
 
 
 
@@ -29,31 +29,11 @@ const Home: NextPage = (props: Props) => {
 
 
 
-  const productState = useSelector((state: any) => state.products)
-
-
-
-  const dispatch: any = useDispatch()
-
-  const { data } = productState.products
-
-
-
-  // console.log("Home props", data && data)
-
-  useEffect(() => {
-    if (productState.status === 'idle') {
-      dispatch(fetchInitialProducts())
-    }
-
-  }, [productState.status, dispatch])
-
-
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>NextJS Ecommerce Store</title>
+        <title>NextJs Redux/Strapi/Stripe mini ecom </title>
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

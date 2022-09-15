@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from "./cart.module.scss"
 import Image from 'next/image'
@@ -26,6 +26,11 @@ const Cart_page = (props: Props) => {
     const quantity = useSelector((state: any) => state.cart.cart.length)
     const cart = useSelector((state: any) => state.cart.cart)
     const total = useSelector((state: any) => state.cart.total)
+
+    console.log("cart", cart)
+
+
+
 
 
 

@@ -142,6 +142,10 @@ const cartSlice = createSlice({
       }, 0)
       state.total = total
     },
+    setCart: (state: CartState) => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]")
+      state.cart = cart
+    },
   },
 })
 
