@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 
 
-  }, [cart, total])
+  }, [])
 
 
   return (

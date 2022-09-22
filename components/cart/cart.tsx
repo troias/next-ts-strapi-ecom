@@ -15,18 +15,28 @@ const Cart = (props: Props) => {
 
     const dispatch = useDispatch()
     const quantity = useSelector((state: CartStateRedux) => state.cart.cart.length)
+    const modalState = useSelector((state: CartStateRedux) => state.cart.modalState)
 
-    let [modelState, setModelState] = useState(false)
+    // let [modelState, setModelState] = useState(false)
 
-    // console.log("modelState", modelState)
+    console.log("modelStateCartPage", modalState)
 
     const cartModelHandler = () => {
-        setModelState((prevState) => prevState = !modelState)
+        // setModelState((prevState) => prevState = !modelState)
+        dispatch(cartActions.updateModalState(
+            {
+                modalState: !modalState
+            }
+
+        ))
 
 
 
     }
 
+
+
+    console.log("modalState", modalState)
 
 
     return (
@@ -35,8 +45,8 @@ const Cart = (props: Props) => {
             <div className={classes.cart_wrapper} onClick={cartModelHandler}>
                 cart    <span className={classes.quantity} > {quantity} </span>
             </div>
-            {modelState ? <Modal>
-                <CartModal showModal={cartModelHandler} />
+            {modalState ? <Modal>
+                <CartModal />
 
             </Modal> : null}
 

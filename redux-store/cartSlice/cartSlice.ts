@@ -13,6 +13,7 @@ export interface CartState {
   isLoading: boolean
   error: unknown
   total: number
+  modalState: boolean
 }
 
 export interface CartStateRedux {
@@ -60,6 +61,7 @@ const cartSlice = createSlice({
     total: 0,
     isLoading: false,
     error: null,
+    modalState: false,
   },
   reducers: {
     addToCart: (state: CartState, action: CartAction) => {
@@ -95,6 +97,7 @@ const cartSlice = createSlice({
       state.cart = state.cart.filter(
         (item: CartItem) => item.id !== action.payload.id
       )
+      localStorage.setItem("cart", JSON.stringify(state.cart))
     },
     updateCart: (state: CartState, action: CartAction) => {
       state.cart = action.payload
@@ -145,6 +148,10 @@ const cartSlice = createSlice({
     setCart: (state: CartState) => {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]")
       state.cart = cart
+    },
+
+    updateModalState: (state: CartState, action: CartAction) => {
+      state.modalState = action.payload.modalState
     },
   },
 })

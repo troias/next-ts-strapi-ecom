@@ -34,8 +34,17 @@ const ProductsList = (props: Props) => {
 
 
     // const products = useSelector(state => state.products.products)
-
     const { data } = productState.products
+    try {
+
+        const { data } = productState.products
+        if (!data) {
+            return <div>Loading...</div>
+        }
+    } catch (error) {
+        dispatch(fetchInitialProducts())
+    }
+
 
     console.log("data", data)
     return (

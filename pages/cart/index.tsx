@@ -7,6 +7,7 @@ import { GrActions, GrAdd } from 'react-icons/gr'
 import { cartActions } from '../../redux-store/cartSlice/cartSlice'
 import { FaMinus } from 'react-icons/fa'
 import { useRouter } from 'next/router'
+import { stringify } from 'querystring'
 
 type Props = {}
 
@@ -26,12 +27,18 @@ const Cart_page = (props: Props) => {
     const quantity = useSelector((state: any) => state.cart.cart.length)
     const cart = useSelector((state: any) => state.cart.cart)
     const total = useSelector((state: any) => state.cart.total)
+    const modalState = useSelector((state: any) => state.cart.modalState)
 
     console.log("cart", cart)
 
 
 
 
+    useEffect(() => {
+        if (cart.length === 0) {
+            dispatch(cartActions.setCart())
+        }
+    }, [cart.length, dispatch])
 
 
 
@@ -59,7 +66,8 @@ const Cart_page = (props: Props) => {
     }
 
     return (
-        <div className={classes.outer_container}>
+        <div className={classes.outer_container}  >
+
             <div className={classes.header}>
                 <h1 className={classes.cart_title}>Cart page</h1>
             </div>
@@ -92,9 +100,12 @@ const Cart_page = (props: Props) => {
                                                         quantityHandler(item.id, "decrease")
                                                     }
                                                     if (item.quantity <= 1) {
+
                                                         dispatch(cartActions.removeFromCart({
                                                             id: item.id,
                                                         }))
+
+
                                                     }
 
 
@@ -118,9 +129,11 @@ const Cart_page = (props: Props) => {
                     <div className={classes.order_summary_items}>
                         <div className={classes.order_summary_item}>
                             <p>{quantity && quantity} unique items in cart</p>
-                            <p>Total items in cart {cart && cart.reduce((acc: any, item: any) => acc + item.quantity, 0)}</p>
+                            <p>Total items in cart {cart ? cart.reduce((acc: any, item: any) => acc + item.quantity, 0) : dispatch(cartActions.setCart())}</p>
                             <p>Subtotal</p>
-                            <p>{cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0)}</p>
+                            <p>{
+                                cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0)
+                            }   </p>
                             <p className={classes.order_summary_item_tax}>Tax</p>
                             <p className={classes.order_summary_item_tax}>{cart && cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0) * 0.15} NZD </p>
                             <p className={classes.order_summary_item_total}>Total</p>

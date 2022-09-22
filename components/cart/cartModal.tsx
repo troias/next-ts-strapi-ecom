@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import classes from './cartModal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import { cartActions } from '../../redux-store/cartSlice/cartSlice'
 import { toLocalStingMoney } from '../../utils/format'
 type Props = {
-    showModal: any
+
 }
 
 
@@ -16,23 +16,55 @@ const CartModal = (props: Props) => {
 
 
     const cart = useSelector((state: any) => state.cart.cart)
+    const modalState = useSelector((state: any) => state.cart.modalState)
     const dispatch = useDispatch()
 
-    console.log("cartcart", cart)
+    console.log("cartcart", modalState)
 
-    const cartModelHandler = () => {
-        props.showModal()
+    const modalClickHandler = (e: any) => {
+        console.log("e.target", e.target)
+
+        cartActions.updateModalState({
+            modalState: !modalState
+        })
     }
+    useEffect(() => {
+
+        const closeOnEscapeKeyDown = (e: any) => {
+            if ((e.charCode || e.keyCode) === 27) {
+                dispatch(cartActions.updateModalState({
+                    modalState: !modalState
+                }))
+            }
+        }
+
+        document.addEventListener('keydown', closeOnEscapeKeyDown)
+    }
+
+
+    ), [modalState]
+
+
+
+
+
+
+
+
 
 
 
     return (
+
+
+
         <div className={classes.cartModal_container}>
+
             <div className={classes.cart_model_header}>
 
-                <span onClick={cartModelHandler}>X</span>
+                <span onClick={modalClickHandler}>X</span>
             </div>
-            <div className={classes.cart_model_body}>
+            <div className={classes.cart_model_body} >
                 <div className={classes.cart_modal_body_header}>
                     <h4 >Product</h4>
 
@@ -147,6 +179,7 @@ const CartModal = (props: Props) => {
 
             </div>
         </div>
+
     )
 }
 
