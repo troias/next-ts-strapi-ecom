@@ -3,11 +3,12 @@ import { createPortal } from 'react-dom'
 import classes from './cartModal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { cartActions, CartStateRedux } from '../../redux-store/cartSlice/cartSlice'
+import { wrapper } from '../../redux-store/indexSlice'
 
-let modalWrapper
-if (typeof document !== 'undefined') {
-    modalWrapper = document.getElementById('modal-root')
-}
+
+
+
+
 
 
 type Props = {
@@ -20,17 +21,22 @@ type Props = {
 
 
 const Modal = (props: Props) => {
+    let modalWrapper
+    if (typeof typeof window === "object") {
+        modalWrapper = useRef(document.getElementById('modal-wrapper')) as React.MutableRefObject<HTMLDivElement>
+
+    }
 
 
+    console.log("wrapper_ref", modalWrapper)
     const dispatch = useDispatch()
 
     const updateModalState = () => {
-        dispatch(cartActions.updateModalState(
-            {
-                modalState: false
-            }
 
-        ))
+
+        dispatch(cartActions.updateModalState({
+            modalState: false
+        }))
     }
 
 
@@ -38,7 +44,7 @@ const Modal = (props: Props) => {
 
 
     >
-        <div className={classes.modal_wrapper} >
+        <div className={classes.modal_wrapper} ref={modalWrapper} onClick={updateModalState} >
 
 
 
@@ -48,6 +54,7 @@ const Modal = (props: Props) => {
     </div>
 
     if (typeof window === "object") {
+
         return createPortal(content, document.getElementById("modals") as Element)
     }
     return null

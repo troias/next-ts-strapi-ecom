@@ -54,12 +54,15 @@ $heading_grey: rgb(82, 79, 79);
     height: 50px;
     background-color: #fff;
     display: flex;
-    z-index: 1;
+   
     justify-content: flex-end;
     align-items: center;
     padding: 0 20px;
     padding: 10px 20px;
    
+}
+.cart_model_close_bttn {
+    z-index: 100;
 }
 
 .cart_model_body {

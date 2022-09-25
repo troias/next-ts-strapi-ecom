@@ -19,14 +19,16 @@ const CartModal = (props: Props) => {
     const modalState = useSelector((state: any) => state.cart.modalState)
     const dispatch = useDispatch()
 
+    // const modalContainer = useRef(null) as React.MutableRefObject<HTMLDivElement>
+
     console.log("cartcart", modalState)
 
     const modalClickHandler = (e: any) => {
         console.log("e.target", e.target)
 
-        cartActions.updateModalState({
+        dispatch(cartActions.updateModalState({
             modalState: !modalState
-        })
+        }))
     }
     useEffect(() => {
 
@@ -45,6 +47,21 @@ const CartModal = (props: Props) => {
     ), [modalState]
 
 
+    const containerHandler = (e: any) => {
+
+
+        e.stopPropagation()
+        dispatch(cartActions.updateModalState({
+            modalState: true
+        }))
+    }
+
+    const closeBttnHandler = (e: any) => {
+        e.stopPropagation()
+        dispatch(cartActions.updateModalState({
+            modalState: false
+        }))
+    }
 
 
 
@@ -58,11 +75,11 @@ const CartModal = (props: Props) => {
 
 
 
-        <div className={classes.cartModal_container}>
+        <div className={classes.cartModal_container} onClick={containerHandler}>
 
             <div className={classes.cart_model_header}>
 
-                <span onClick={modalClickHandler}>X</span>
+                <span onClick={closeBttnHandler} className={classes.cart_model_close_bttn} >X </span>
             </div>
             <div className={classes.cart_model_body} >
                 <div className={classes.cart_modal_body_header}>
