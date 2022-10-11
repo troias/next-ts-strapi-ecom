@@ -4,6 +4,8 @@ import { Product } from '../../lib/types'
 import { toLocalStingMoney } from '../../utils/format'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { getProducts } from '../../lib/strapiApi'
+
 import { useRouter } from 'next/router'
 import { CartItem, cartActions } from '../../redux-store/cartSlice/cartSlice'
 import { fetchInitialProducts } from '../../redux-store/productsSlice/productsSlice'
@@ -11,15 +13,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 interface Props {
+    products: Product[]
 
 }
 
 const ProductsList = (props: Props) => {
 
+
+    console.log("productList props", props)
+
     const productState = useSelector((state: any) => state.products)
     const dispatch = useDispatch()
+
     const addTocartHandler = (productObj: CartItem) => {
-        console.log("addTocartHandler", productObj)
+
+        // console.log("addTocartHandler", productObj)
+
         if (productObj) {
             dispatch(cartActions.addToCart(productObj))
         }
@@ -34,7 +43,21 @@ const ProductsList = (props: Props) => {
 
 
     // const products = useSelector(state => state.products.products)
-    const { data } = productState.products
+
+
+    const { data } = productState.products || {} as {
+        products: {
+            data: Product[]
+        }
+    }
+
+    if (!data) {
+        return <div>Loading...</div>
+    }
+
+    // console.log("data", data)
+
+
     try {
 
         const { data } = productState.products
@@ -46,7 +69,7 @@ const ProductsList = (props: Props) => {
     }
 
 
-    console.log("data", data)
+    // console.log("data", data)
     return (
         <div className={styles.products_container}>
             <h2>Products</h2>
@@ -100,3 +123,9 @@ const ProductsList = (props: Props) => {
 
 
 export default ProductsList
+
+
+
+
+// Language: typescript
+// Path: project-20-strapi-ecom/my-app/components/products/productsList.module.scss

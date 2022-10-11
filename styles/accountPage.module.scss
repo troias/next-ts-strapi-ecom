@@ -1,0 +1,112 @@
+.account_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 80px;
+  .title {
+    margin: 25px 0;
+  }
+  .form {
+    width: 380px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.account_page_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 80px;
+}
+
+.account_page_title {
+  font-size: 38px;
+  margin: 10px 0;
+}
+
+.account_page_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.account_page_col_1 {
+    width: 380px;
+}
+
+.account_page_nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.account_page_links {
+    color: #777;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    &:hover {
+        color: #333;
+    }
+}
+
+.account_page_col_2 {
+    width: 380px;
+}
+
+.account_page_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 80px;
+}
+
+.account_page_form {
+    width: 380px;
+}
+
+.account_page_form_group {
+    margin-bottom: 15px;
+
+    label {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    input {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        color: #777;
+        font-size: 16px;
+        height: 50px;
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    button {
+        background-color: #000;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        height: 50px;
+        letter-spacing: 0.5px;
+        line-height: 50px;
+        padding: 0 35px;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 25px;
+    }
+}
+
+
+

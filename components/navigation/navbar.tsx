@@ -25,20 +25,33 @@ const Navbar = (props: Props) => {
 
       <div className={classes.navbar_collapse} id="navbarSupportedContent">
         <ul className={classes.navbar_nav}>
-          <li className={classes.nav_item}>
 
-            <Link href="/" className={classes.nav_link}>
+          <ul className={classes.navbar_nav_links}>
+            <li>
+              <Link href="/" className={classes.nav_link}>
 
-              <span className={classes.nav_link} >  Home</span>
+                <span className={classes.nav_link}>Home</span>
+              </Link>
+            </li>
 
-            </Link>
 
-          </li>
-          <li className={classes.nav_item}>
-            <Link href="/products" className={classes.nav_link}>
-              Products
-            </Link>
-          </li>
+
+            <li>
+              <Link href="/products" className={classes.nav_link}>
+                Products
+              </Link>
+
+            </li>
+
+
+            <li>
+              <Link href="/account" className={classes.nav_link}>
+                account
+              </Link>
+
+            </li>
+          </ul>
+
 
 
           <form className={classes.nav_search_form}>

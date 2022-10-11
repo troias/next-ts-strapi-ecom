@@ -30,6 +30,37 @@
 .navbar_toggler_icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
+.navbar_nav_links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            
+                a {
+                    color: #777;
+                    display: block;
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 20px;
+                    padding: 10px 15px;
+                    text-transform: uppercase;
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            
+        }
+
+    
+}
 
 .navbar_collapse {
     align-items: center;
@@ -41,11 +72,12 @@
 .navbar_nav {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
 
     li {
         margin-bottom: 10px;
         list-style: none;
+
     }
 
     @media screen and (min-width: 768px) {
@@ -70,6 +102,7 @@
     line-height: 20px;
     padding: 10px 10px 10px 15px;
     text-transform: uppercase;
+    margin-left: 1rem;
     cursor: pointer;
     ;
 

@@ -146,8 +146,12 @@ const cartSlice = createSlice({
       state.total = total
     },
     setCart: (state: CartState) => {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]")
-      state.cart = cart
+      try {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]")
+        state.cart = cart
+      } catch (error) {
+        throw new Error("Error setting cart")
+      }
     },
 
     updateModalState: (state: CartState, action: CartAction) => {

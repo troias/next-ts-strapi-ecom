@@ -3,7 +3,7 @@ import { type } from "os"
 import { getProducts } from "../../lib/strapiApi"
 import { Product } from "../../lib/types"
 
-console.log("getProducts")
+// console.log("getProducts")
 
 type State = {
   products: Product[]

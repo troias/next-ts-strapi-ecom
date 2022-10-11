@@ -21,10 +21,10 @@ const CartModal = (props: Props) => {
 
     // const modalContainer = useRef(null) as React.MutableRefObject<HTMLDivElement>
 
-    console.log("cartcart", modalState)
+    // console.log("cartcart", modalState)
 
     const modalClickHandler = (e: any) => {
-        console.log("e.target", e.target)
+        // console.log("e.target", e.target)
 
         dispatch(cartActions.updateModalState({
             modalState: !modalState
@@ -102,7 +102,7 @@ const CartModal = (props: Props) => {
                 </div>
                 {cart.map((item: any) => {
                     return (
-                        <div className={classes.cart_modal_body_grid_container}>
+                        <div className={classes.cart_modal_body_grid_container} key={item.id}>
 
                             <div >
                                 <Image src={item.image} width={100} height={100} className={classes.cart_modal_body_item_img} />
