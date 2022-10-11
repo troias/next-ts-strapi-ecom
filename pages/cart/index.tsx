@@ -97,7 +97,12 @@ const Cart_page = (props: Props) => {
                                     </div>
                                 </div>
                             </td>
-                            <td>${item.price}</td>
+                            <td >
+                                <div className={classes.cart__price}>
+                                    ${item.price}
+                                </div>
+
+                            </td>
                             <td>
                                 <div className={classes.cart__quantity}>
                                     <span>{item.quantity}</span>
@@ -106,11 +111,18 @@ const Cart_page = (props: Props) => {
                                     <button onClick={() => quantityHandler(item.id, 'increase')}><GrAdd /></button>
                                 </div>
                             </td>
-                            <td>${item.price * item.quantity}</td>
                             <td>
-                                <button onClick={() => dispatch(cartActions.removeFromCart({
-                                    id: item.id,
-                                }))}><GrActions /></button>
+                                <div className={classes.cart__total}>
+                                    ${item.price * item.quantity}
+                                </div>
+
+                            </td>
+                            <td>
+                                <div className={classes.cart__remove}>
+                                    <button onClick={() => dispatch(cartActions.removeFromCart({
+                                        id: item.id,
+                                    }))}><GrActions /></button>
+                                </div>
                             </td>
                         </tr>
 

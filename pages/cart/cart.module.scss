@@ -24,6 +24,10 @@
 
   }
 
+  &__price {
+    
+  }
+
   &__quantity {
     display: flex;
     justify-content: space-between;
@@ -34,6 +38,42 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
+
+  &__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  &__remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+
+
 
 }
  
