@@ -50,6 +50,13 @@ const Navbar = (props: Props) => {
               </Link>
 
             </li>
+
+            <li>
+              <Link href="/cart" className={classes.nav_link}>
+                cart
+              </Link>
+
+            </li>
           </ul>
 
 

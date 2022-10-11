@@ -183,7 +183,12 @@ const CartModal = (props: Props) => {
 
                                     return acc + item.price * item.quantity
                                 }
-                                    , 0) + 10)}
+                                    , 0) + (cart.reduce((acc: any, item: any) => {
+                                        return acc + item.price * item.quantity
+                                    }, 0) > 100 ? 0 : 10) + (cart.reduce((acc: any, item: any) => {
+                                        return acc + item.price * item.quantity
+                                    }, 0) * 0.1))}
+
                             </h4>
 
                         </div>

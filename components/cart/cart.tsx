@@ -14,8 +14,12 @@ interface Props {
 const Cart = (props: Props) => {
 
     const dispatch = useDispatch()
-    const quantity = useSelector((state: CartStateRedux) => state.cart.cart.length)
+
+
+
     const modalState = useSelector((state: CartStateRedux) => state.cart.modalState)
+
+    const cartQuantity = useSelector((state: CartStateRedux) => state.cart.cart.reduce((acc: number, item: any) => acc + item.quantity, 0))
 
     // let [modelState, setModelState] = useState(false)
 
@@ -43,7 +47,7 @@ const Cart = (props: Props) => {
 
         <div className={classes.cart_container}>
             <div className={classes.cart_wrapper} onClick={cartModelHandler}>
-                cart    <span className={classes.quantity} > {quantity} </span>
+                cart    <span className={classes.quantity} > {cartQuantity} </span>
             </div>
             {modalState ? <Modal>
                 <CartModal />
